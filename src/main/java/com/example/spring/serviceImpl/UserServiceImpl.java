@@ -1,5 +1,7 @@
 package com.example.spring.serviceImpl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +29,16 @@ public class UserServiceImpl implements UserService {
 		userRepository.save(userEntity);
 
 		return "Succesfully Saved the User";
+	}
+
+	@Override
+	public List<UserEntity> getAllUsers() {
+		return userRepository.findAll();
+	}
+
+	@Override
+	public UserEntity getByFirstName(String name) {
+		return userRepository.findByFirstName(name);
 	}
 
 }
