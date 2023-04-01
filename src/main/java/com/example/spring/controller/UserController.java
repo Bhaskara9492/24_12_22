@@ -2,7 +2,10 @@ package com.example.spring.controller;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,5 +39,16 @@ public class UserController {
 		System.out.println(name);
 		return userService.getByFirstName(name);
 	}
+	
+	
+	@Transactional
+	@DeleteMapping("/deleteUser/{name}")
+	public String deleteUser(@PathVariable String name) {
+		
+		
+		return userService.deleteUser(name);
+	}
+	
+	
 	
 }

@@ -13,4 +13,6 @@ public interface UserService {
 	
 	UserEntity getByFirstName(String name);
 
+	String deleteUser(String name);
+
 }
