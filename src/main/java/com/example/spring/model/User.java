@@ -1,8 +1,10 @@
 package com.example.spring.model;
 
+import lombok.Builder;
 import lombok.Data;
 
 @Data
+@Builder(toBuilder = true)
 public class User {
 
 	private String firstName;

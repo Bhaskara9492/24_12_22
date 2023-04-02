@@ -10,42 +10,54 @@ import com.example.spring.model.User;
 import com.example.spring.repository.UserRepository;
 import com.example.spring.service.UserService;
 
+import javax.jws.soap.SOAPBinding;
+
 @Service
 public class UserServiceImpl implements UserService {
 
-	@Autowired
-	private UserRepository userRepository;
+    @Autowired
+    private UserRepository userRepository;
 
-	@Override
-	public String saveUser(User user) {
-		System.out.println("user in Service Layer : " + user);
+    @Override
+    public String saveUser(User user) {
+        System.out.println("user in Service Layer : " + user);
 
-		UserEntity userEntity = new UserEntity();
-		userEntity.setFirstName(user.getFirstName());
-		userEntity.setLastName(user.getLastName());
-		userEntity.setEmail(user.getEmail());
-		userEntity.setPhone(user.getPhone());
+        userRepository.save(UserEntity.builder().firstName(user.getFirstName())
+                .lastName(user.getLastName())
+                .email(user.getEmail())
+                .phone(user.getPhone()).build());
 
-		userRepository.save(userEntity);
+        return "Succesfully Saved the User";
+    }
 
-		return "Succesfully Saved the User";
-	}
+    @Override
+    public List<UserEntity> getAllUsers() {
+        return userRepository.findAll();
+    }
 
-	@Override
-	public List<UserEntity> getAllUsers() {
-		return userRepository.findAll();
-	}
+    @Override
+    public UserEntity getByFirstName(String name) {
+        return userRepository.findByFirstName(name);
+    }
 
-	@Override
-	public UserEntity getByFirstName(String name) {
-		return userRepository.findByFirstName(name);
-	}
+    @Override
+    public String deleteUser(String name) {
 
-	@Override
-	public String deleteUser(String name) {
+        userRepository.deleteByFirstName(name);
+        return "User Deleted Succesfully";
+    }
 
-		userRepository.deleteByFirstName(name);
-		return "User Deleted Succesfully";
-	}
+    @Override
+    public UserEntity updateUser(User user) {
+
+        UserEntity userEntity = userRepository.findByFirstName(user.getFirstName());
+
+       return userRepository.save(userEntity.builder().firstName(user.getFirstName())
+                .lastName(user.getLastName())
+                .email(user.getEmail())
+                .phone(user.getPhone()).build());
+
+
+    }
 
 }

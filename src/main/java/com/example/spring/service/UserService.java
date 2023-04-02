@@ -15,4 +15,5 @@ public interface UserService {
 
 	String deleteUser(String name);
 
+	UserEntity updateUser(User user);
 }
