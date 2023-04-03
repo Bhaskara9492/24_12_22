@@ -15,41 +15,40 @@ import com.example.spring.service.UserService;
 @RequestMapping("/api/user")
 public class UserController {
 
-	@Autowired
-	private UserService userService;
+    @Autowired
+    private UserService userService;
 
-	@PostMapping("/saveUser")
-	public String saveUser(@RequestBody User user) {
-		return userService.saveUser(user);
-	}
+    @PostMapping("/saveUser")
+    public String saveUser(@RequestBody User user) {
+        return userService.saveUser(user);
+    }
 
-	@GetMapping("/getAllUsers")
-	public List<UserEntity> getAllUsers() {
-		return userService.getAllUsers();
-	}
+    @GetMapping("/getAllUsers")
+    public List<UserEntity> getAllUsers() {
+        return userService.getAllUsers();
+    }
 
-	@GetMapping("getByName/{name}")
-	public UserEntity getUserByFirstName(@PathVariable String name) {
-		System.out.println(name);
-		return userService.getByFirstName(name);
-	}
-	
-	
-	@Transactional
-	@DeleteMapping("/deleteUser/{name}")
-	public String deleteUser(@PathVariable String name) {
-		
-		
-		return userService.deleteUser(name);
-	}
+    @GetMapping("getByName/{name}")
+    public UserEntity getUserByFirstName(@PathVariable String name) {
+        return userService.getByFirstName(name);
+    }
 
-	@PutMapping("/updateUser")
-	public UserEntity updateUser(@RequestBody User user){
 
-		return userService.updateUser(user);
-	}
+    @Transactional
+    @DeleteMapping("/deleteUser/{name}")
+    public String deleteUser(@PathVariable String name) {
+        return userService.deleteUser(name);
+    }
 
-	
-	
-	
+    @PutMapping("/updateUser")
+    public UserEntity updateUser(@RequestBody User user) {
+        return userService.updateUser(user);
+    }
+
+
+
+
+
+
+
 }

@@ -52,10 +52,11 @@ public class UserServiceImpl implements UserService {
 
         UserEntity userEntity = userRepository.findByFirstName(user.getFirstName());
 
-       return userRepository.save(userEntity.builder().firstName(user.getFirstName())
-                .lastName(user.getLastName())
-                .email(user.getEmail())
-                .phone(user.getPhone()).build());
+       return userRepository.save(userEntity.toBuilder().id(userEntity.getId())
+               .firstName(user.getFirstName())
+               .lastName(user.getLastName())
+               .phone(user.getPhone())
+               .build());
 
 
     }
